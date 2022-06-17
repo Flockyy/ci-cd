@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template
-from models.User import User
+# from models.User import User
 
 app = Flask(__name__)
 
