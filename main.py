@@ -1,7 +1,5 @@
 from flask import Flask, jsonify, render_template
-# from models.User import User
-
-app = Flask(__name__)
+from channel_app import app
 
 usersList = ['Aaron', 'Bianca', 'Cat', 'Danny', 'Elena']
 
@@ -31,4 +29,5 @@ def addUserByName(name):
     usersList.append(name)
     return jsonify({ 'message': 'New user added'  })
 
-app.run()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000)
