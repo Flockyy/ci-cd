@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template
-from channel_app import app
+
+app = Flask(__name__)
 
 usersList = ['Aaron', 'Bianca', 'Cat', 'Danny', 'Elena']
 
@@ -7,7 +8,7 @@ usersList = ['Aaron', 'Bianca', 'Cat', 'Danny', 'Elena']
 # def index():
 #     return render('Hello World')
 
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('base.html')
 
