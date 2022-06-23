@@ -1,1 +1,4 @@
-Flask
+flask
+flask-dance[sqla]
+blinker
+dotenv
