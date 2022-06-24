@@ -1,4 +1,4 @@
-flask
-flask-dance[sqla]
-blinker
-# dotenv
+dotenv==0.20.0
+flask==2.1.2
+flask-dance[sqla]==6.0.0
+blinker==1.4

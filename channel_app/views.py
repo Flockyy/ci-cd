@@ -3,7 +3,7 @@ from flask import Flask, jsonify, render_template, redirect, url_for
 from flask_dance.contrib.google import make_google_blueprint, google
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 app = Flask(__name__, template_folder='templates')
 
