@@ -1,4 +1,5 @@
 python-dotenv
 flask
+pytest
 flask-dance[sqla]
 blinker
