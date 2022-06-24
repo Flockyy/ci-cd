@@ -1,6 +1,6 @@
+import os
 from flask import Flask, jsonify, render_template, redirect, url_for
 from flask_dance.contrib.google import make_google_blueprint, google
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,7 +29,7 @@ def index():
     user_info_endpoint='/oauth2/v2/userinfo'
     if google.authorized:
         google_data=google.get(user_info_endpoint).json()
-
+        
     return render_template('base.html',
         google_data = google_data,
         fetch_url=google.base_url+user_info_endpoint
@@ -38,6 +38,18 @@ def index():
 @app.route('/login')
 def login():
     return redirect(url_for('google.login'))
+
+@app.route('/logout')
+def logout():
+    token = blueprint.token["access_token"]
+    resp = google.post(
+        "https://accounts.google.com/o/oauth2/revoke",
+        params={"token": token},
+        headers={"Content-Type": "application/x-www-form-urlencoded"}
+    )
+    assert resp.ok, resp.text
+    del blueprint.token
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host='myfakedomain.com', port=5000, debug=True)
