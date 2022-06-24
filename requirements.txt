@@ -1,4 +1,4 @@
-dotenv==0.20.0
+dotenv==0.0.5
 flask==2.1.2
 flask-dance[sqla]==6.0.0
 blinker==1.4
