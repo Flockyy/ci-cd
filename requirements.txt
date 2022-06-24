@@ -3,3 +3,4 @@ flask
 pytest
 flask-dance[sqla]
 blinker
+applicationinsights

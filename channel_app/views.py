@@ -1,12 +1,16 @@
 import os
+import logging
 from flask import Flask, jsonify, render_template, redirect, url_for
 from flask_dance.contrib.google import make_google_blueprint, google
 from dotenv import load_dotenv
+from applicationinsights.flask.ext import AppInsights
+from logging import StreamHandler
 
 load_dotenv(override=True)
 
 app = Flask(__name__, template_folder='../templates')
 
+appinsights = AppInsights(app)
 client_id = os.getenv('GOOGLE_CLIENT_ID')
 client_secret = os.getenv('GOOGLE_CLIENT_SECRET')
 app.secret_key=os.getenv('secret_key')
@@ -21,10 +25,25 @@ blueprint = make_google_blueprint(
     scope=['profile', 'email']
 )
 
+streamHandler = StreamHandler()
+app.logger.addHandler(streamHandler)
+app.logger.setLevel(logging.DEBUG)
 app.register_blueprint(blueprint, url_prefix="/login")
+
+@app.after_request
+def after_request(response):
+    appinsights.flush()
+    return response
 
 @app.route('/')
 def index():
+    
+    app.logger.debug('This is a debug log message')
+    app.logger.info('This is an information log message')
+    app.logger.warn('This is a warning log message')
+    app.logger.error('This is an error message')
+    app.logger.critical('This is a critical message')
+    
     google_data = None
     user_info_endpoint='/oauth2/v2/userinfo'
     if google.authorized:
