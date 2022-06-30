@@ -4,5 +4,6 @@ selenium
 webdriver-manager
 pytest
 flask-dance[sqla]
+Flask-SQLAlchemy
 blinker
 applicationinsights

@@ -4,14 +4,13 @@ from flask import Flask, jsonify, render_template, redirect, url_for
 from flask_dance.contrib.google import make_google_blueprint, google
 from dotenv import load_dotenv
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
-from applicationinsights.flask.ext import AppInsights
+
 from logging import StreamHandler
 
 load_dotenv(override=True)
 
 app = Flask(__name__, template_folder='../templates')
 
-appinsights = AppInsights(app)
 client_id = os.getenv('GOOGLE_CLIENT_ID')
 client_secret = os.getenv('GOOGLE_CLIENT_SECRET')
 app.secret_key=os.getenv('secret_key')
@@ -36,7 +35,7 @@ login_manager.init_app(app)
 
 @app.after_request
 def after_request(response):
-    appinsights.flush()
+    # appinsights.flush()
     return response
 
 # @login_manager.user_loader
@@ -45,19 +44,20 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    
+    # Test of app.logger
     app.logger.debug('This is a debug log message')
     app.logger.info('This is an information log message')
     app.logger.warn('This is a warning log message')
     app.logger.error('This is an error message')
     app.logger.critical('This is a critical message')
     
+    # Google endpoint
     google_data = None
     user_info_endpoint='/oauth2/v2/userinfo'
+
     if google.authorized:
         google_data = google.get(user_info_endpoint).json()
     
-
     return render_template('base.html',
         google_data = google_data,
         fetch_url = google.base_url+user_info_endpoint
