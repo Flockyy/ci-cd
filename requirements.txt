@@ -1,5 +1,7 @@
 python-dotenv
 flask
+selenium
+webdriver-manager
 pytest
 flask-dance[sqla]
 blinker
