@@ -5,6 +5,6 @@ webdriver-manager
 pytest
 flask-dance[sqla]
 Flask-SQLAlchemy
-Flask-Login
+flask-login
 blinker
 applicationinsights
