@@ -11,10 +11,6 @@ load_dotenv(override=True)
 auth_bp = Blueprint(
     "auth_bp", __name__, template_folder="templates", static_folder="static"
 )
-
-@auth_bp.route('/login', methods=['GET', 'POST'])
-def login():
-    return redirect(url_for('google.login'))
     
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -31,4 +27,4 @@ def load_user(user_id):
 def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash("You must be logged in to view that page.")
-    return redirect(url_for("auth_bp.login"))
+    return redirect(url_for("main_bp.index"))

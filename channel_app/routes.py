@@ -38,9 +38,12 @@ def index():
         fetch_url = google.base_url+user_info_endpoint
     )
     
-    
+@main_bp.route('/google_login', methods=['GET', 'POST'])
+def google_login():
+    return redirect(url_for('google.login'))
+
 @main_bp.route("/logout")
-@login_required
+# @login_required
 def logout():
     """User log-out logic."""
     token = blueprint.token["access_token"]
@@ -52,4 +55,4 @@ def logout():
     assert resp.ok, resp.text
     del blueprint.token
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main_bp.index'))

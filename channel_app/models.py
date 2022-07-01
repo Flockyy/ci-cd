@@ -6,9 +6,11 @@ from . import db
 
 class User(UserMixin, db.Model):
     """User account model."""
+    
     __tablename__ = 'users'
+    
     id = db.Column(db.Integer, primary_key=True)
-    sub = db.Column(db.Integer, nullable=False, unique=True)
+    sub = db.Column(db.Integer, nullable=True, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     picture = db.Column(db.String(255))
     fullname = db.Column(db.String(255))
@@ -25,4 +27,4 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.fullname)
