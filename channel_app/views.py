@@ -7,6 +7,8 @@ from flask_login import LoginManager, current_user, login_required, login_user, 
 
 from logging import StreamHandler
 
+from channel_app.User import User
+
 load_dotenv(override=True)
 
 app = Flask(__name__, template_folder='../templates')
@@ -38,9 +40,9 @@ def after_request(response):
     # appinsights.flush()
     return response
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.get(user_id)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 @app.route('/')
 def index():

@@ -9,8 +9,5 @@ class TestExampleOne:
     def test_title_blog(self):
         self.driver.get('https://www.delrayo.tech/blog')
         print(self.driver.title)
-    
-    # def test_main(self):
-    #     self.driver.get('')
-    #     assert self.driver.title == ""
+
 
