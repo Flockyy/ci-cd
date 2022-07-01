@@ -1,6 +1,6 @@
 """Logged-in page routes."""
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user, login_required, logout_user
+from flask_login import current_user, login_required, login_user, logout_user
 from flask_dance.contrib.google import google
 from . import blueprint
 
@@ -25,7 +25,6 @@ main_bp = Blueprint(
 
 @main_bp.route('/', methods=["GET"])
 def index():
-
     # Google endpoint
     google_data = None
     user_info_endpoint = '/oauth2/v2/userinfo'
