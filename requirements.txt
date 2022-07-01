@@ -6,5 +6,7 @@ pytest
 flask-dance[sqla]
 Flask-SQLAlchemy
 flask-login
+Flask-Assets
+cssmin
 blinker
 applicationinsights
