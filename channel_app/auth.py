@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from . import login_manager
 from .models import User, db
 
+#load env params
 load_dotenv(override=True)
 
 # Blueprint Configuration
